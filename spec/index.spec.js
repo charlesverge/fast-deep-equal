@@ -10,7 +10,10 @@ describe('equal', function() {
     describe(suite.description, function() {
       suite.tests.forEach(function (test) {
         it(test.description, function() {
-          assert.strictEqual(equal(test.value1, test.value2), test.equal);
+          if (test.ignorekey)
+            assert.strictEqual(equal(test.value1, test.value2, test.ignorekey), test.equal);
+          else
+            assert.strictEqual(equal(test.value1, test.value2), test.equal);
         });
       });
     });

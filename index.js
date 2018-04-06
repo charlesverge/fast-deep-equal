@@ -4,7 +4,7 @@ var isArray = Array.isArray;
 var keyList = Object.keys;
 var hasProp = Object.prototype.hasOwnProperty;
 
-module.exports = function equal(a, b) {
+module.exports = function equal(a, b, ignore) {
   if (a === b) return true;
 
   var arrA = isArray(a)
@@ -17,7 +17,7 @@ module.exports = function equal(a, b) {
     length = a.length;
     if (length != b.length) return false;
     for (i = 0; i < length; i++)
-      if (!equal(a[i], b[i])) return false;
+      if (!equal(a[i], b[i], ignore)) return false;
     return true;
   }
 
@@ -45,7 +45,8 @@ module.exports = function equal(a, b) {
 
     for (i = 0; i < length; i++) {
       key = keys[i];
-      if (!equal(a[key], b[key])) return false;
+      if (ignore && ignore.indexOf(key) !== -1) continue;
+      if (!equal(a[key], b[key], ignore)) return false;
     }
 
     return true;

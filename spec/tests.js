@@ -316,5 +316,38 @@ module.exports = [
         equal: true
       }
     ]
+  },
+  {
+    description: 'ignorekeys',
+    tests: [
+      {
+        description: 'empty objects are equal',
+        value1: {},
+        value2: {},
+        equal: true,
+        ignorekey: ['a'],
+      },
+      {
+        description: 'equal objects (same properties "order")',
+        value1: {a: 1, b: '2'},
+        value2: {a: 1, b: '2'},
+        equal: true,
+        ignorekey: ['a'],
+      },
+      {
+        description: 'equal objects (a key different and ignored)',
+        value1: {a: 1, b: '2'},
+        value2: {a: 2, b: '2'},
+        equal: true,
+        ignorekey: ['a'],
+      },
+      {
+        description: 'equal objects (a key different and not ignored)',
+        value1: {a: 1, b: '2'},
+        value2: {a: 2, b: '2'},
+        equal: false,
+        ignorekey: ['b'],
+      }
+    ]
   }
 ];
